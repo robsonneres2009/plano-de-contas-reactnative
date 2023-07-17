@@ -13,6 +13,7 @@ Desenvolver um aplicativo em React Native que permita realizar o cadastro de um 
 6. Testing Library
 7. Jest
 8. Formik e Yup
+9. Lint e Prettier
 
 ## Para executar o projeto localmente
 Para iniciar execute o comando para instalar as dependencias:
