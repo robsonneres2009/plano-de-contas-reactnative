@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Render component snapshot 1`] = `
+<View
+  style={
+    {
+      "backgroundColor": "#F0EDF5",
+      "borderTopEndRadius": 28,
+      "borderTopStartRadius": 28,
+      "height": "100%",
+      "marginTop": 10,
+      "paddingHorizontal": 24,
+      "paddingVertical": 16,
+      "width": "100%",
+    }
+  }
+>
+  <Text>
+    Card
+  </Text>
+</View>
+`;
