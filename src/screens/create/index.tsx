@@ -31,7 +31,9 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
     if (route.params.id) {
       const id = route.params.id;
       const expense = findLevelExpense(id);
+      const main = findMainExpense(id);
 
+      formik.setFieldValue("principal", `${main?.id} - ${main?.nome}`);
       formik.setFieldValue("id", expense?.id);
       formik.setFieldValue(
         "aceitaLancamento",

@@ -79,7 +79,9 @@ const ExpensesProvider = ({ children }: Props) => {
 
   const addExpense = (expense: ExpensesData) => {
     let newExpenses = expenses;
-    newExpenses.push(expense);
+    let newExpense = expense;
+    if (expense.id.length === 1) newExpense.id = `${newExpense.id}.0`;
+    newExpenses.push(newExpense);
     setExpenses(newExpenses);
   };
 
