@@ -1,23 +1,20 @@
-import {
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { Button, ScrollView, View } from "react-native";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { ScrollView, View } from "react-native";
 import { useFormik } from "formik";
 import Card from "../../components/card";
 import Input from "../../components/input";
 import Select from "../../components/select";
 import style from "./styled";
 import { ExpensesContext, ExpensesData } from "../../hooks/useExpenses";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, RouteProp } from "@react-navigation/native";
 import MessageError from "../../components/messageError";
 import { SchemaYup } from "./validationYup";
 import Header from "../../components/header";
+import { RootStackParamList } from "../home/types";
 
-export default function Create() {
+type CreateScreenRouteProp = RouteProp<RootStackParamList, "Create">;
+
+export default function Create({ route }: { route: CreateScreenRouteProp }) {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
   const {
     expenses,
@@ -27,9 +24,23 @@ export default function Create() {
     findMainExpense,
   } = useContext(ExpensesContext);
   const [OptionsMain, setOptionMain] = useState([] as any[]);
+  const [modeView, setModeView] = useState(false);
 
   useEffect(() => {
     convertingExpensesToOptions();
+    if (route.params.id) {
+      const id = route.params.id;
+      const expense = findLevelExpense(id);
+
+      formik.setFieldValue("id", expense?.id);
+      formik.setFieldValue(
+        "aceitaLancamento",
+        expense?.aceitaLancamento ? "Sim" : "Não"
+      );
+      formik.setFieldValue("nome", expense?.nome);
+      formik.setFieldValue("tipo", expense?.tipo);
+      setModeView(true);
+    }
   }, []);
 
   const convertingExpensesToOptions = useCallback(() => {
@@ -86,7 +97,7 @@ export default function Create() {
 
   return (
     <View>
-      <Header onClick={formik.handleSubmit} />
+      <Header onClick={formik.handleSubmit} modeView={modeView} />
       <Card>
         <ScrollView>
           <View style={style.container}>

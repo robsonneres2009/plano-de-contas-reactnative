@@ -7,9 +7,10 @@ import { Size } from "../../../theme/Layout";
 interface PropsItem {
   expense: ExpensesData;
   action: (item: ExpensesData) => void;
+  onPress: (id: string) => void;
 }
 
-export default function ListItem({ expense, action }: PropsItem) {
+export default function ListItem({ expense, action, onPress }: PropsItem) {
   return (
     <TouchableOpacity
       style={{
@@ -22,6 +23,7 @@ export default function ListItem({ expense, action }: PropsItem) {
         width: "100%",
       }}
       key={expense?.id}
+      onPress={() => onPress(expense.id)}
     >
       <Text
         style={{

@@ -20,7 +20,6 @@ export default function Home() {
   const [selectedItemDelete, setSelectedItemDelete] = useState(
     {} as ExpensesData
   );
-
   const onChangeSearch = (query: string) => setSearchQuery(query);
 
   useEffect(() => {

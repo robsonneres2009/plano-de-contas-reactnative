@@ -17,11 +17,7 @@ interface Props {
 
 export default function ListContainer({ action, data, onPress }: Props) {
   const renderItem = ({ item }: ListRenderItemInfo<ExpensesData>) => {
-    return (
-      <TouchableOpacity onPress={() => onPress(item.id)} key={item.id}>
-        <Item expense={item} action={action} />
-      </TouchableOpacity>
-    );
+    return <Item expense={item} action={action} onPress={onPress} />;
   };
 
   return (
