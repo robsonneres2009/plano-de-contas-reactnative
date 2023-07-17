@@ -1,8 +1,9 @@
-import { ThemeProvider } from "styled-components";
-import Theme from "./src/theme/Theme";
-import Navigation from "./src/navigation";
-import "react-native-gesture-handler";
-import { ExpensesProvider } from "./src/hooks/useExpenses";
+import 'react-native-gesture-handler';
+import { ThemeProvider } from 'styled-components';
+
+import { ExpensesProvider } from './src/hooks/useExpenses';
+import Navigation from './src/navigation';
+import Theme from './src/theme/Theme';
 
 export default function App() {
   return (

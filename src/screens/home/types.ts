@@ -1,6 +1,7 @@
-import { RouteProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { ConstantsNavigation } from "../../navigation/constants";
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+import { ConstantsNavigation } from '../../navigation/constants';
 
 export type RootStackParamList = {
   Home: undefined;

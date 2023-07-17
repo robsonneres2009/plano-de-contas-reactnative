@@ -1,6 +1,7 @@
-import { TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
-import Colors from "../../../theme/Colors";
+import { TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import Colors from '../../../theme/Colors';
 
 interface Props {
   onClick: () => void;

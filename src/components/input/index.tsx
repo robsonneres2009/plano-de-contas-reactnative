@@ -4,8 +4,9 @@ import {
   TextInputProps,
   TouchableOpacity,
   View,
-} from "react-native";
-import style from "./styled";
+} from 'react-native';
+
+import style from './styled';
 
 interface Props extends TextInputProps {
   label: string;

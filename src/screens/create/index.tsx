@@ -1,18 +1,19 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
-import { useFormik } from "formik";
-import Card from "../../components/card";
-import Input from "../../components/input";
-import Select from "../../components/select";
-import style from "./styled";
-import { ExpensesContext, ExpensesData } from "../../hooks/useExpenses";
-import { useNavigation, RouteProp } from "@react-navigation/native";
-import MessageError from "../../components/messageError";
-import { SchemaYup } from "./validationYup";
-import Header from "../../components/header";
-import { RootStackParamList } from "../home/types";
+import { useNavigation, RouteProp } from '@react-navigation/native';
+import { useFormik } from 'formik';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { ScrollView, View } from 'react-native';
 
-type CreateScreenRouteProp = RouteProp<RootStackParamList, "Create">;
+import style from './styled';
+import { SchemaYup } from './validationYup';
+import Card from '../../components/card';
+import Header from '../../components/header';
+import Input from '../../components/input';
+import MessageError from '../../components/messageError';
+import Select from '../../components/select';
+import { ExpensesContext, ExpensesData } from '../../hooks/useExpenses';
+import { RootStackParamList } from '../home/types';
+
+type CreateScreenRouteProp = RouteProp<RootStackParamList, 'Create'>;
 
 export default function Create({ route }: { route: CreateScreenRouteProp }) {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
@@ -33,22 +34,23 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
       const expense = findLevelExpense(id);
       const main = findMainExpense(id);
 
-      formik.setFieldValue("principal", `${main?.id} - ${main?.nome}`);
-      formik.setFieldValue("id", expense?.id);
+      formik.setFieldValue('principal', `${main?.id} - ${main?.nome}`);
+      formik.setFieldValue('id', expense?.id);
       formik.setFieldValue(
-        "aceitaLancamento",
-        expense?.aceitaLancamento ? "Sim" : "Não"
+        'aceitaLancamento',
+        expense?.aceitaLancamento ? 'Sim' : 'Não',
       );
-      formik.setFieldValue("nome", expense?.nome);
-      formik.setFieldValue("tipo", expense?.tipo);
+      formik.setFieldValue('nome', expense?.nome);
+      formik.setFieldValue('tipo', expense?.tipo);
       setModeView(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const convertingExpensesToOptions = useCallback(() => {
-    let newOptionsMain: any[] = [];
+    const newOptionsMain: any[] = [];
 
-    expenses?.map((expense) => {
+    expenses?.map(expense => {
       expense.aceitaLancamento === false &&
         newOptionsMain.push({
           value: expense.id,
@@ -57,26 +59,27 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
     });
 
     setOptionMain(newOptionsMain);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formik = useFormik({
     initialValues: {
-      principal: "",
-      id: "",
-      nome: "",
-      tipo: "",
-      aceitaLancamento: "",
+      principal: '',
+      id: '',
+      nome: '',
+      tipo: '',
+      aceitaLancamento: '',
     },
-    onSubmit: (values) => {
-      let newExpense = {
+    onSubmit: values => {
+      const newExpense = {
         id: values.id,
         nome: values.nome,
         tipo: values.tipo,
-        aceitaLancamento: values.aceitaLancamento === "sim" ? true : false,
+        aceitaLancamento: values.aceitaLancamento === 'sim',
       };
 
       addExpense(newExpense);
-      navigation.navigate("Home", {});
+      navigation.navigate('Home', {});
     },
     validationSchema: SchemaYup,
     validate(values) {
@@ -86,11 +89,11 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
       const errors = {} as ExpensesData;
 
       if (main && main?.tipo !== values.tipo) {
-        errors.tipo = "O tipo da conta deve ser igual ao do pai da conta";
+        errors.tipo = 'O tipo da conta deve ser igual ao do pai da conta';
       }
 
       if (codigoIsRepeated) {
-        errors.id = "Código já esta em uso";
+        errors.id = 'Código já esta em uso';
       }
 
       return errors;
@@ -108,10 +111,10 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
               label="Conta pai"
               placeholder="Selecione a conta pai"
               value={formik.values.principal}
-              setSelected={(val) => {
+              setSelected={val => {
                 const id = generateNewCode(val);
-                formik.setFieldValue("principal", val);
-                formik.setFieldValue("id", id);
+                formik.setFieldValue('principal', val);
+                formik.setFieldValue('id', id);
               }}
             />
             {formik.touched.principal && formik.errors.principal && (
@@ -122,8 +125,8 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
               label="Código"
               placeholder="Digite o código da conta"
               value={formik.values.id}
-              onChangeText={formik.handleChange("id")}
-              onBlur={formik.handleBlur("id")}
+              onChangeText={formik.handleChange('id')}
+              onBlur={formik.handleBlur('id')}
             />
             {formik.touched.id && formik.errors.id && (
               <MessageError message={formik.errors.id} />
@@ -133,8 +136,8 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
               label="Nome"
               placeholder="Digite o nome da conta"
               value={formik.values.nome}
-              onChangeText={formik.handleChange("nome")}
-              onBlur={formik.handleBlur("nome")}
+              onChangeText={formik.handleChange('nome')}
+              onBlur={formik.handleBlur('nome')}
             />
             {formik.touched.nome && formik.errors.nome && (
               <MessageError message={formik.errors.nome} />
@@ -142,13 +145,13 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
 
             <Select
               options={[
-                { label: "Receita", value: "Receita" },
-                { label: "Despesa", value: "Despesa" },
+                { label: 'Receita', value: 'Receita' },
+                { label: 'Despesa', value: 'Despesa' },
               ]}
               label="Tipo"
               placeholder="Selecione o tipo da conta"
               value={formik.values.tipo}
-              setSelected={(val) => formik.setFieldValue("tipo", val)}
+              setSelected={val => formik.setFieldValue('tipo', val)}
             />
             {formik.touched.tipo && formik.errors.tipo && (
               <MessageError message={formik.errors.tipo} />
@@ -156,15 +159,13 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
 
             <Select
               options={[
-                { label: "Sim", value: "Sim" },
-                { label: "Não", value: "Não" },
+                { label: 'Sim', value: 'Sim' },
+                { label: 'Não', value: 'Não' },
               ]}
               label="Aceita lançamentos"
               placeholder="Selecione se aceita lançamentos"
               value={formik.values.aceitaLancamento}
-              setSelected={(val) =>
-                formik.setFieldValue("aceitaLancamento", val)
-              }
+              setSelected={val => formik.setFieldValue('aceitaLancamento', val)}
             />
             {formik.touched.aceitaLancamento &&
               formik.errors.aceitaLancamento && (

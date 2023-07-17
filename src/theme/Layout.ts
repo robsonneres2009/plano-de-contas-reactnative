@@ -1,4 +1,4 @@
-import { Dimensions } from "react-native";
+import { Dimensions } from 'react-native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -7,10 +7,10 @@ const height = Dimensions.get('window').height;
 export const window = {
   width,
   height,
-}
+};
 
 /** Verifica se device tem largura menor que 375 */
-export const isSmallDevice = width < 375
+export const isSmallDevice = width < 375;
 
 /** @enum Tamanhos em numero da aplicação {number} */
 export enum Size {
@@ -38,24 +38,24 @@ export enum Size {
 
 /** @enum Tamanhos em pixel da aplicação {string} */
 export enum Pixels {
-  p0 = "0px",
-  p2 = "2px",
-  p4 = "4px",
-  p8 = "8px",
-  p10 = "10px",
-  p12 = "12px",
-  p14 = "14px",
-  p16 = "16px",
-  p20 = "20px",
-  p24 = "24px",
-  p28 = "28px",
-  p32 = "32px",
-  p36 = "36px",
-  p40 = "40px",
-  p44 = "44px",
-  p48 = "48px",
-  p52 = "52px",
-  p56 = "56px",
-  p60 = "60px",
-  p64 = "64px",
+  p0 = '0px',
+  p2 = '2px',
+  p4 = '4px',
+  p8 = '8px',
+  p10 = '10px',
+  p12 = '12px',
+  p14 = '14px',
+  p16 = '16px',
+  p20 = '20px',
+  p24 = '24px',
+  p28 = '28px',
+  p32 = '32px',
+  p36 = '36px',
+  p40 = '40px',
+  p44 = '44px',
+  p48 = '48px',
+  p52 = '52px',
+  p56 = '56px',
+  p60 = '60px',
+  p64 = '64px',
 }

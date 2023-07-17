@@ -5,10 +5,10 @@ import {
   createContext,
   useContext,
   useState,
-} from "react";
+} from 'react';
 
 interface ExpensesContextData {
-  expenses: Array<ExpensesData>;
+  expenses: ExpensesData[];
   setExpenses: Dispatch<SetStateAction<ExpensesData[]>>;
   removeExpense: (id: string) => void;
   addExpense: (expense: ExpensesData) => void;
@@ -29,57 +29,57 @@ interface Props {
 }
 
 export const ExpensesContext = createContext<ExpensesContextData>(
-  {} as ExpensesContextData
+  {} as ExpensesContextData,
 );
 
 const ExpensesProvider = ({ children }: Props) => {
   const [expenses, setExpenses] = useState([
     {
-      id: "9.9",
-      nome: "Conta X",
-      tipo: "Receita",
+      id: '9.9',
+      nome: 'Conta X',
+      tipo: 'Receita',
       aceitaLancamento: false,
     },
     {
-      id: "9.10",
-      nome: "Conta X",
-      tipo: "Receita",
+      id: '9.10',
+      nome: 'Conta X',
+      tipo: 'Receita',
       aceitaLancamento: true,
     },
     {
-      id: "9.9.999",
-      nome: "Conta X",
-      tipo: "Receita",
+      id: '9.9.999',
+      nome: 'Conta X',
+      tipo: 'Receita',
       aceitaLancamento: true,
     },
     {
-      id: "9.9.999.999",
-      nome: "Conta X",
-      tipo: "Receita",
+      id: '9.9.999.999',
+      nome: 'Conta X',
+      tipo: 'Receita',
       aceitaLancamento: false,
     },
     {
-      id: "9.9.999.99.998",
-      nome: "Conta X",
-      tipo: "Receita",
+      id: '9.9.999.99.998',
+      nome: 'Conta X',
+      tipo: 'Receita',
       aceitaLancamento: true,
     },
     {
-      id: "9.9.999.999.999",
-      nome: "Conta X",
-      tipo: "Receita",
+      id: '9.9.999.999.999',
+      nome: 'Conta X',
+      tipo: 'Receita',
       aceitaLancamento: true,
     },
-  ] as Array<ExpensesData>);
+  ] as ExpensesData[]);
 
   const removeExpense = (id: string) => {
-    const newExpenses = expenses.filter((expense) => expense.id !== id);
+    const newExpenses = expenses.filter(expense => expense.id !== id);
     setExpenses(newExpenses);
   };
 
   const addExpense = (expense: ExpensesData) => {
-    let newExpenses = expenses;
-    let newExpense = expense;
+    const newExpenses = expenses;
+    const newExpense = expense;
     if (expense.id.length === 1) newExpense.id = `${newExpense.id}.0`;
     newExpenses.push(newExpense);
     setExpenses(newExpenses);
@@ -89,24 +89,24 @@ const ExpensesProvider = ({ children }: Props) => {
     if (id) {
       /* Declara o novo codigo em forma de array e string */
       let newCodArray: any[] = [];
-      let newCod = "";
+      let newCod = '';
 
       /* Separando a os numeros do texto*/
       const regexToNumber = /[^0-9.]/g;
-      const numberDefault = id.replace(regexToNumber, "");
+      const numberDefault = id.replace(regexToNumber, '');
 
       /* Transformando em array a string de numeros */
-      const decimalsMain = numberDefault.split(".");
+      const decimalsMain = numberDefault.split('.');
 
       /* Apagando ultimo digito e tranformando em string */
-      let ParentID: String[] = [];
+      let ParentID: string[] = [];
       ParentID = decimalsMain;
       ParentID.length > 1 && ParentID.pop();
-      ParentID.join(".");
+      ParentID.join('.');
 
       /* Encontrando filhos */
       const maxChildAccount = expenses
-        .filter((expense) => expense.id.startsWith(ParentID.join(".") + "."))
+        .filter(expense => expense.id.startsWith(ParentID.join('.') + '.'))
         .reduce((maxExpense: ExpensesData | null, expense: ExpensesData) => {
           if (!maxExpense || expense.id > maxExpense.id) {
             return expense;
@@ -115,7 +115,7 @@ const ExpensesProvider = ({ children }: Props) => {
         }, null);
 
       /* Transformando em array a string de numeros */
-      const decimals = maxChildAccount?.id?.split(".").reverse();
+      const decimals = maxChildAccount?.id?.split('.').reverse();
       newCodArray = decimals || [];
 
       /* 
@@ -126,22 +126,22 @@ const ExpensesProvider = ({ children }: Props) => {
       for (let i = 0; i < newCodArray.length; i++) {
         const currentItem = newCodArray[i];
 
-        if (currentItem === "999") {
+        if (currentItem === '999') {
           newCodArray.splice(i, 1);
           i--; // Ajustar o índice após a remoção do item
         } else if (!foundLessThan999 && Number(currentItem) < 999) {
           newCodArray[i] = (Number(currentItem) + 1).toString();
 
           const testingDuplicated = findLevelExpense(
-            newCodArray.reverse().join(".")
+            newCodArray.reverse().join('.'),
           );
 
-          foundLessThan999 = testingDuplicated ? false : true;
+          foundLessThan999 = !testingDuplicated;
         }
       }
 
       newCodArray.reverse();
-      newCod = newCodArray.join(".");
+      newCod = newCodArray.join('.');
 
       return newCod;
     } else {
@@ -153,19 +153,19 @@ const ExpensesProvider = ({ children }: Props) => {
     if (id) {
       /* Separando a os numeros do texto*/
       const regexToNumber = /[^0-9.]/g;
-      const numberDefault = id.replace(regexToNumber, "");
+      const numberDefault = id.replace(regexToNumber, '');
 
       /* Transformando em array a string de numeros */
-      const decimalsMain = numberDefault.split(".");
+      const decimalsMain = numberDefault.split('.');
 
       /* Apagando ultimo digito e tranformando em string */
-      let ParentID: String[] = [];
+      let ParentID: string[] = [];
       ParentID = decimalsMain;
-      ParentID.join(".");
+      ParentID.join('.');
 
       /* Encontrando main */
       const main = expenses.filter(
-        (expense) => expense.id === ParentID.join(".")
+        expense => expense.id === ParentID.join('.'),
       );
 
       return main.length > 0 ? main[0] : null;
@@ -178,20 +178,20 @@ const ExpensesProvider = ({ children }: Props) => {
     if (id) {
       /* Separando a os numeros do texto*/
       const regexToNumber = /[^0-9.]/g;
-      const numberDefault = id.replace(regexToNumber, "");
+      const numberDefault = id.replace(regexToNumber, '');
 
       /* Transformando em array a string de numeros */
-      const decimalsMain = numberDefault.split(".");
+      const decimalsMain = numberDefault.split('.');
 
       /* Apagando ultimo digito e tranformando em string */
-      let ParentID: String[] = [];
+      let ParentID: string[] = [];
       ParentID = decimalsMain;
       ParentID.length > 1 && ParentID.pop();
-      ParentID.join(".");
+      ParentID.join('.');
 
       /* Encontrando main */
-      const main = expenses.filter((expense) =>
-        expense.id.startsWith(ParentID.join("."))
+      const main = expenses.filter(expense =>
+        expense.id.startsWith(ParentID.join('.')),
       );
 
       return main.length > 0 ? main[0] : null;
@@ -210,8 +210,7 @@ const ExpensesProvider = ({ children }: Props) => {
         generateNewCode,
         findLevelExpense,
         findMainExpense,
-      }}
-    >
+      }}>
       {children}
     </ExpensesContext.Provider>
   );

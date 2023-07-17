@@ -1,44 +1,47 @@
-import { Text, View } from "react-native";
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import Card from "../../components/card";
-import CustomSearchBar from "../../components/searchBar";
-import style from "./styled";
-import { ExpensesContext, ExpensesData } from "../../hooks/useExpenses";
-import { deburr } from "lodash";
-import { List } from "../../components/list";
-import { Modal } from "../../components/modal";
-import { useNavigation } from "@react-navigation/native";
-import { ConstantsNavigation } from "../../navigation/constants";
-import { ProfileScreenNavigationProp } from "./types";
+import { useNavigation } from '@react-navigation/native';
+import { deburr } from 'lodash';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+
+import style from './styled';
+import { ProfileScreenNavigationProp } from './types';
+import Card from '../../components/card';
+import { List } from '../../components/list';
+import { Modal } from '../../components/modal';
+import CustomSearchBar from '../../components/searchBar';
+import { ExpensesContext, ExpensesData } from '../../hooks/useExpenses';
+import { ConstantsNavigation } from '../../navigation/constants';
 
 export default function Home() {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
   const { expenses, removeExpense } = useContext(ExpensesContext);
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [searchQuery, setSearchQuery] = React.useState('');
   const [expenseFiltered, setExpenseFiltered] = useState(expenses);
   const [isVisibleModalDelete, setVisibleModalDelete] = useState(false);
   const [selectedItemDelete, setSelectedItemDelete] = useState(
-    {} as ExpensesData
+    {} as ExpensesData,
   );
   const onChangeSearch = (query: string) => setSearchQuery(query);
 
   useEffect(() => {
     handlerFilter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   useEffect(() => {
     setExpenseFiltered(expenses);
-    setSearchQuery("");
+    setSearchQuery('');
   }, [expenses]);
 
   const handlerFilter = useCallback(() => {
-    const filteredExpense = expenses?.filter((expense) =>
+    const filteredExpense = expenses?.filter(expense =>
       deburr(expense.nome.toLowerCase()).includes(
-        deburr(searchQuery.toLowerCase())
-      )
+        deburr(searchQuery.toLowerCase()),
+      ),
     );
 
     setExpenseFiltered(filteredExpense);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   const handlerCloseModal = () => {

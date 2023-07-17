@@ -33,6 +33,15 @@ yarn android
 yarn ios
 ```
 
+## Para gerar build
+```bash
+#android
+eas build -p android --profile preview
+
+#ios
+eas build -p ios --profile preview
+```
+
 ## Para executar o projeto localmente
 Para rodar os testes
 ```bash

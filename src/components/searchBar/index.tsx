@@ -1,5 +1,6 @@
-import { Searchbar } from "react-native-paper";
-import style from "./styled";
+import { Searchbar } from 'react-native-paper';
+
+import style from './styled';
 
 type Props = {
   placeholder: string;

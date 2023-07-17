@@ -1,13 +1,13 @@
-import { TextInputProps, View } from "react-native";
-import style from "./styled";
+import { useState } from 'react';
+import { TextInputProps, View } from 'react-native';
 
-import Input from "../input";
-import { Modal } from "../modal";
-import { useState } from "react";
+import style from './styled';
+import Input from '../input';
+import { Modal } from '../modal';
 
 interface Props extends TextInputProps {
   label: string;
-  options: Array<Options>;
+  options: Options[];
   setSelected: (val: any) => void;
   dropdownShown?: boolean;
 }
@@ -44,7 +44,7 @@ export default function Select({
       {openMenu && (
         <Modal.Options
           onClose={() => setOpenMenu(false)}
-          onClick={(value) => {
+          onClick={value => {
             setSelected(value);
             setOpenMenu(false);
           }}

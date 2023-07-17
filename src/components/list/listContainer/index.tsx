@@ -1,13 +1,8 @@
-import {
-  ListRenderItemInfo,
-  SafeAreaView,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { FlatList } from "react-native";
-import Item from "../listItem";
-import { Size } from "../../../theme/Layout";
-import { ExpensesData } from "../../../hooks/useExpenses";
+import { ListRenderItemInfo, SafeAreaView, View, FlatList } from 'react-native';
+
+import { ExpensesData } from '../../../hooks/useExpenses';
+import { Size } from '../../../theme/Layout';
+import Item from '../listItem';
 
 interface Props {
   action: (item: ExpensesData) => void;
@@ -24,15 +19,15 @@ export default function ListContainer({ action, data, onPress }: Props) {
     <SafeAreaView style={{ flex: 1 }}>
       <FlatList
         ItemSeparatorComponent={() => (
-          <View style={{ width: "100%", height: 5 }}></View>
+          <View style={{ width: '100%', height: 5 }}></View>
         )}
         style={{ marginTop: Size.s16 }}
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         refreshing={true}
         ListFooterComponent={() => (
-          <View style={{ width: "100%", height: 100 }}></View>
+          <View style={{ width: '100%', height: 100 }}></View>
         )}
       />
     </SafeAreaView>

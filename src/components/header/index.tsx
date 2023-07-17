@@ -1,8 +1,9 @@
-import { StatusBar } from "expo-status-bar";
-import Colors from "../../theme/Colors";
-import { Container, Content } from "./styled";
-import { Button } from "../button";
-import { ConstantsNavigation } from "../../navigation/constants";
+import { StatusBar } from 'expo-status-bar';
+
+import { Container, Content } from './styled';
+import { ConstantsNavigation } from '../../navigation/constants';
+import Colors from '../../theme/Colors';
+import { Button } from '../button';
 
 interface Props {
   onClick: () => void;

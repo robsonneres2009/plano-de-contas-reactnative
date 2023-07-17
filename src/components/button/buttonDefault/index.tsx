@@ -1,4 +1,4 @@
-import { ButtonContainer, ButtonText, CustomButton } from "./styles";
+import { ButtonContainer, ButtonText, CustomButton } from './styles';
 
 interface Props {
   title: string;

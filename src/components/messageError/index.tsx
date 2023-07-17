@@ -1,4 +1,4 @@
-import { Container, Label } from "./styled";
+import { Container, Label } from './styled';
 
 interface Props {
   message: string;

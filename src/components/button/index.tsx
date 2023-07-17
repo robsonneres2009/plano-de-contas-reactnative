@@ -1,7 +1,7 @@
-import ButtonAdd from "./buttonAdd";
-import ButtonBack from "./buttonBack";
-import ButtonDefault from "./buttonDefault";
-import ButtonSave from "./buttonSave";
+import ButtonAdd from './buttonAdd';
+import ButtonBack from './buttonBack';
+import ButtonDefault from './buttonDefault';
+import ButtonSave from './buttonSave';
 
 export const Button = {
   Add: ButtonAdd,

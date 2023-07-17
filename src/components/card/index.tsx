@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
-import { View } from "react-native";
-import style from "./styled";
+import { ReactNode } from 'react';
+import { View } from 'react-native';
+
+import style from './styled';
 
 type Props = {
   children: ReactNode;
