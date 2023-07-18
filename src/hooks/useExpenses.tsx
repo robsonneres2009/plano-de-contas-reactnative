@@ -78,10 +78,18 @@ const ExpensesProvider = ({ children }: Props) => {
   };
 
   const addExpense = (expense: ExpensesData) => {
-    const newExpenses = expenses;
+    let newExpenses = expenses;
     const newExpense = expense;
     if (expense.id.length === 1) newExpense.id = `${newExpense.id}.0`;
     newExpenses.push(newExpense);
+
+    /* Ordenando expenses */
+    newExpenses = newExpenses.sort((a, b) => {
+      const idA = parseInt(a.id, 10);
+      const idB = parseInt(b.id, 10);
+
+      return idA - idB;
+    });
     setExpenses(newExpenses);
   };
 
@@ -137,6 +145,8 @@ const ExpensesProvider = ({ children }: Props) => {
           );
 
           foundLessThan999 = !testingDuplicated;
+        } else {
+          newCodArray.reverse();
         }
       }
 

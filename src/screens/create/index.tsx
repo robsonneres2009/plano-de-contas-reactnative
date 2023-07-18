@@ -51,16 +51,20 @@ export default function Create({ route }: { route: CreateScreenRouteProp }) {
     const newOptionsMain: any[] = [];
 
     expenses?.map(expense => {
-      expense.aceitaLancamento === false &&
+      if (expense.aceitaLancamento === false) {
         newOptionsMain.push({
           value: expense.id,
           label: `${expense.id} - ${expense.nome}`,
         });
+      } else {
+        /* Quando não fazer push ele ignora */
+        return null;
+      }
     });
 
     setOptionMain(newOptionsMain);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [expenses]);
 
   const formik = useFormik({
     initialValues: {
